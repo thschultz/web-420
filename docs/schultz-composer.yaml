@@ -1,0 +1,73 @@
+# WEB 420 RESTful API
+# Contributors
+
+# Richard Krasso
+# Thomas James Schultz
+
+openapi: 3.0.3
+info:
+  title: Composer API
+  version: 1.0.0
+paths:
+  /composers:
+    get:
+      tags:
+        - Composers
+      summary: returns a list of composer documents
+      description: API for returning a list of composers from MongoDB Atlas
+      responses:
+        '200':
+          description: Composer documents
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+    post:
+      tags:
+        - Composers
+      summary: Creates new composer object
+      description: API for adding new composer objects
+      requestBody:
+        description: Composer's information
+        content:
+          application/json:
+            schema:
+              type: object
+              description: composer object
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  description: composer's first name
+                  type: string
+                lastName:
+                  description: composer's last name 
+                  type: string
+      responses:
+        '200':
+          description: Composer added
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+  /composers/{id}:
+    get:
+      tags: 
+        - Composers
+      summary: returns a composer document
+      description: API for returning a single composer object from MongoDB
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The composerId requested by the user
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Composer document in JSON format
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
