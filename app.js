@@ -7,6 +7,23 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Link to mongoDB. 
+var mongoDB = "mongodb+srv://tschultz420:s3cret@web420db.wmtlkqd.mongodb.net/?retryWrites=true&w=majority";
+
+// Mongoose connection. 
+mongoose.connect(mongoDB, {
+});
+
+mongoose.Promise = global.Promise;
+
+var db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "MongoDB connection error: "));
+
+db.once("open", function() {
+    console.log("Application connected to MongoDB instance");
+});
+
 app.use(express.json())
 .use(express.urlencoded({'extended': true}));
 
