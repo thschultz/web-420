@@ -1,7 +1,7 @@
 // require express
 const express = require('express');
 // require Composer
-const Composer = require('../models/schultz-composer');
+const Composer = require('../models/schultz-composer.js');
 
 // create router variable
 const router = express.Router();
@@ -69,7 +69,7 @@ router.get('/composers', async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.get('/composers/{:id}', async (req, res) => {
+router.get('/composers/:id', async (req, res) => {
 	try {
 		Composer.findOne({ _id: req.params.id }, function (err, composer) {
 			if (err) {
@@ -126,7 +126,8 @@ router.get('/composers/{:id}', async (req, res) => {
 router.post('/composers', async (req, res) => {
 	try {
 		const newComposer = {
-			type: req.body.type,
+			firstName : req.body.firstName,
+			lastName : req.body.lastName,
 		};
 
 		await Composer.create(newComposer, function (err, composer) {
@@ -147,3 +148,5 @@ router.post('/composers', async (req, res) => {
 		});
 	}
 });
+
+module.exports = router;
