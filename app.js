@@ -5,6 +5,7 @@ const swaggerJS = require('swagger-jsdoc');
 const mongoose = require('mongoose');
 const composerAPI = require('./routes/schultz-composer-routes.js');
 const personAPI = require('./routes/schultz-person-routes');
+const userAPI = require('./routes/schultz-session-routes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,6 +46,7 @@ const openapiSpecification = swaggerJS(options);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(openapiSpecification));
 app.use('/api', composerAPI);
 app.use('/api', personAPI);
+app.use('/api', userAPI);
 
 http.createServer(app)
 .listen(PORT, (e) => {
