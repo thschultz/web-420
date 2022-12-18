@@ -7,6 +7,7 @@ const composerAPI = require('./routes/schultz-composer-routes.js');
 const personAPI = require('./routes/schultz-person-routes');
 const userAPI = require('./routes/schultz-session-routes.js');
 const customerAPI = require('./routes/schultz-node-shopper-routes.js');
+const teamAPI = require('./routes/schultz-teams-routes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,7 @@ app.use('/api', composerAPI);
 app.use('/api', personAPI);
 app.use('/api', userAPI);
 app.use('/api', customerAPI);
+app.use('/api', teamAPI);
 
 http.createServer(app)
 .listen(PORT, (e) => {
